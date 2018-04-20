@@ -4,6 +4,7 @@ version=9.22
 revision=10
 build_style=gnu-configure
 configure_args="
+ --enable-24-bit-color
  --with-terminfo=/usr/share/terminfo --enable-256-color
  --enable-font-styles --enable-xim --enable-keepscrolling
  --enable-selectionscrolling --enable-smart-resize --enable-transparency

@@ -1,0 +1,45 @@
+--- src/rxvtfont.C
++++ src/rxvtfont.C
+@@ -1026,8 +1026,8 @@ rxvt_font_x11::has_char (unicode_t unicode, const rxvt_fontprop *prop, bool &car
+
+   careful = xcs->lbearing < 0 || xcs->rbearing > prop->width * wcw;
+
+-  if (careful && !OVERLAP_OK (w, wcw, prop))
+-    return false;
++  // if (careful && !OVERLAP_OK (w, wcw, prop))
++  //   return false;
+
+   return true;
+ }
+@@ -1345,12 +1345,12 @@ rxvt_font_xft::has_char (unicode_t unicode, const rxvt_fontprop *prop, bool &car
+
+   careful = g.x > 0 || w > prop->width * wcw;
+
+-  if (careful && !OVERLAP_OK (w, wcw, prop))
+-    return false;
+-
+-  // this weeds out _totally_ broken fonts, or glyphs
+-  if (!OVERLAP_OK (g.xOff, wcw, prop))
+-    return false;
++  // if (careful && !OVERLAP_OK (w, wcw, prop))
++  //   return false;
++  //
++  // // this weeds out _totally_ broken fonts, or glyphs
++  // if (!OVERLAP_OK (g.xOff, wcw, prop))
++  //   return false;
+
+   return true;
+ }
+@@ -1394,12 +1394,9 @@ rxvt_font_xft::draw (rxvt_drawable &d, int x, int y,
+           XftGlyphExtents (disp, f, &glyph, 1, &extents);
+
+           ep->glyph = glyph;
+-          ep->x = x_ + (cwidth - extents.xOff >> 1);
++          ep->x = x_;
+           ep->y = y_ + ascent;
+
+-          if (extents.xOff == 0)
+-            ep->x = x_ + cwidth;
+-
+           ep++;
+         }
